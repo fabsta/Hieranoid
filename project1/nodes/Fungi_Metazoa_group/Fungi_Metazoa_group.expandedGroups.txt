@@ -1,0 +1,5 @@
+Fungi_Metazoa_groupFungi_Metazoa_group1:YHR165C,Eumetazoa1
+Fungi_Metazoa_groupFungi_Metazoa_group2:YDL140C,Eumetazoa2
+Fungi_Metazoa_groupFungi_Metazoa_group3:YNR016C,YMR207C,FBpp0111967
+Fungi_Metazoa_groupFungi_Metazoa_group4:YNL262W,Eumetazoa3
+Fungi_Metazoa_groupFungi_Metazoa_group5:YGL206C,Eumetazoa4

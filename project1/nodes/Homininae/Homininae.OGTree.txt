@@ -1,0 +1,4 @@
+HieranoidOG-HomininaeHomininae1:((ENSPTRP00000000280:1.000,ENSP00000354558:1.000)HomininaeHomininae1:4955)root;
+HieranoidOG-HomininaeHomininae2:((ENSPTRP00000009635:1.000,ENSP00000322570:1.000)HomininaeHomininae2:1.000)root;
+HieranoidOG-HomininaeHomininae3:((ENSPTRP00000024207:1.000,ENSP00000263200:1.000)HomininaeHomininae3:1.000)root;
+HieranoidOG-HomininaeHomininae4:((ENSPTRP00000014560:1.000,ENSP00000304350:1.000)HomininaeHomininae4:1.000)root;

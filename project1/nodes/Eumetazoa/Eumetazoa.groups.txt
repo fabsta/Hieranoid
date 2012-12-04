@@ -1,0 +1,4 @@
+EumetazoaEumetazoa1:Bilateria1,185061
+EumetazoaEumetazoa2:Euarchontoglires3,229643
+EumetazoaEumetazoa3:Homininae2,119951
+EumetazoaEumetazoa4:Bilateria2,163153
