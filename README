@@ -55,6 +55,11 @@ Where to put my files:
 Hieranoid requires a set of sequences as well as a guide tree. By default the Hieranoid searches for the sequences in data/sequences and for the guide tree
 in data/tree. These options can be changed in the Configuration file.
 
+
+Output:
+The following is an example of the Hieranoid output format:
+HieranoidOG-Eukaryota3:((At1g50030.1:1.000,((ENSPTRP00000000280:1.000,ENSP00000354558:1.000)Homininae1:1.000,ENSMUSP00000099510:1.000)Euarchontoglires1:1.000)Eukaryota3:1.000)root;
+The first is the name of the Hieranoid group followed by a newick string with inparalog scores
  
 
 
