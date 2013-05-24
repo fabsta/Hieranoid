@@ -206,7 +206,6 @@ sub alignAndConsense{
         #print "\tTrying to collect sequences from ".$innerNode->fileInformation->sequenceSearchInputFile."\n";
         $innerNode->get_sequencesByID(\%ID2sequencesHash);
         $innerNode->get_cladeSequencesByID(\%ID2sequencesHash);
-        #print Dumper %ID2sequencesHash;
         # align&consense
         #print "\t\tcompute alignments and consensus\n";
         # numeric sort does not work anymore because clusters might look like "Homininae85"
@@ -348,13 +347,15 @@ sub alignAndConsense{
                                          my $number_of_sequences_for_group = 0;
                                          my @ids_for_group = ();
                                          my %duplicateSequencesInGroupHash = ();
+					 my $current_seq_string = "";
+					 my $tmp_keys = "";
+					 my $arbitri = 0;
                                          ### delete old files
                                          ### FILE CONTAINS:
                                          # speciesname04 --> member1, member2,...,memberx
                                          #DEBUG("\tCurrent ortholog group: $og ( $current_number_of_og / $number_of_ogs_total)\n");
                                          foreach my $current_id(split(/,/,$groupPredictionHash{$og})){
-                                                 #print "\tsearching for $current_id\n";
-                                                 #DEBUG("\tsearching for $current_id\n");
+					 #foreach my $current_id(@tmp_id){
                                                  next if $current_id eq ',';
                                                  my $sequence = q();
                                                  if(exists $duplicateSequencesInGroupHash{$current_id}){
@@ -368,17 +369,27 @@ sub alignAndConsense{
                                                            exit;
                                                  }
                                                  # CHECK IF THIS ID IS ACTUALLY A PROFILE
-                                                 if(! exists $ID2sequencesHash{$current_id}){
-                                                         ERROR("\t\tCould not find sequence for id [$current_id] of ".$innerNode->name."\n");
+						 foreach $tmp_keys (keys %ID2sequencesHash){
+                                                 #if(!exists $ID2sequencesHash{$current_id}){
+							 if ($tmp_keys =~/$current_id/){
+								$arbitri = 1;
+								$current_seq_string = $ID2sequencesHash{$tmp_keys};
+								last;
+							 }
+						 }
+						 if ($arbitri == 0){
+                                                  	 ERROR("\t\tCould not find sequence for id [$current_id] of ".$innerNode->name."\n");
                                                          print "\t\tCould not find sequence for id [$current_id] of ".$innerNode->name."\n";	
                                                          exit;
-                                                 }
+						 }
                                                  # Avoid duplicate sequences
                                                  $duplicateSequencesInGroupHash{$current_id} = 1;
                                                  $duplicateSequencesTotalHash{$current_id} = 1;
-                                                 my $current_seq_string = $ID2sequencesHash{$current_id};
+                                                 #my $current_seq_string = $ID2sequencesHash{$tmp_keys};
                                                  my $MATCHPATTERN = 'A-Za-z\-\.\*\?';
-                                                 if($current_seq_string !~ /^([$MATCHPATTERN]+)$/){
+						 #my $MATCHPATTERN = 'A-Za-z\';
+                                                 #if($current_seq_string !~ /^([$MATCHPATTERN]+)$/){
+						 if($current_seq_string !~ /^[$MATCHPATTERN]/){
                                                          WARN("Wrong sequence format for $current_id with sequence $current_seq_string");
                                                          next;
                                                  }
@@ -463,6 +474,9 @@ sub alignAndConsense{
                                          my $alignment = $alignment_in->next_aln();
                                          foreach my $seq ($alignment->each_seq) {
                                                  $alignmentAsString .= ">".$seq->id."#".$seq->seq."#";
+						 #print "\n-------------\n";
+						 #print $seq->id;
+						 #print "\n-------------\n";
                                          }
                                          $alignments2FileString .= "$og\t$alignmentAsString\n";
                                          
@@ -559,7 +573,11 @@ sub addDaughterNonGroupSequences{
         #print Dumper %all_used_IDs;
         # Get all sequence / cladeSequences
         my %ID2sequencesHash;
+	#print keys(%ID2sequencesHash);
+	#print "\n-------------------\n";
         $daughterNode->getDaughterSequencesById(\%ID2sequencesHash);
+	#print keys(%ID2sequencesHash);
+	#print "\n-------------------\n";
         #$daughterNode->get_cladeSequencesByID(\%ID2sequencesHash);
         if(!keys(%ID2sequencesHash)){
                 ERROR("Could not get clade sequence for  ".$daughterNode->name."\n");
@@ -922,6 +940,10 @@ sub orthologyPredictions2OGs{
                         # save 
                         #print {$OUTPUT_CLUSTER_FH} "$new_cluster:".join(",",@array_of_ids_for_og)."\n";
                         $GroupsFile  .= "$new_cluster:".join(",",@array_of_ids_for_og)."\n";
+			#print "****---------\n";
+                        #print $GroupsFile;
+			#print @array_of_ids_for_og;
+                        #print "\n****--------\n";
                         #print "\n\n";
                         @array_of_ids_for_og = ();
                         $previous_og = $og;
@@ -957,6 +979,7 @@ sub orthologyPredictions2OGs{
                 if(exists $og_assignments1_hash{$id} || exists $og_assignments2_hash{$id}){
  #                        print {$OUTPUT_FH}	$innerNode->name."$og\t$bit_score\t$species\t$bootstrap\t$id\n";
                         $InparanoidSQLFile .= $innerNode->name."$og\t$bit_score\t$species\t$bootstrap\t$id\n";						
+			#print "id---->",$id,"\n";
                         push(@array_of_ids_for_og,$id);
                 }
                 else{
@@ -965,6 +988,7 @@ sub orthologyPredictions2OGs{
                         # OG4 = Homo_sapiens1, Homo_sapiens2, Mus_musculus3
  #                        print {$OUTPUT_FH} $innerNode->name."$og\t$bit_score\t$species\t$bootstrap\t$id\n";	
                         $InparanoidSQLFile .= $innerNode->name."$og\t$bit_score\t$species\t$bootstrap\t$id\n";						
+			#print "id---->",$id,"\n";
                         push(@array_of_ids_for_og,$id);
                 }
         }
@@ -1024,8 +1048,9 @@ sub orthologyPredictions2OGs{
         # Write output files
         # Converted Orthology predictions        
                 write_to_file({file_name => $innerNode->orthologGroups->orthologyPredictionFile, text => $InparanoidSQLFile});
-        # Converted Orthology predictions        
-                write_to_file({file_name => $innerNode->orthologGroups->groupsFile, text => $GroupsFile});
+        # Converted Orthology predictions       
+		#print  "\ntext--->",text => $GroupsFile,"\n";
+		write_to_file({file_name => $innerNode->orthologGroups->groupsFile, text => $GroupsFile});
         # Tree file        
                 write_to_file({file_name => $innerNode->orthologGroups->OGTreeFile, text => $treeFile});
     #    # Converted Orthology predictions        
