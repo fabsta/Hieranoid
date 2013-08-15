@@ -15,14 +15,30 @@ Installation
 Checking system requirements
 -	Perl
 -	BioPerl
+-	Usearch or Blastall
 -	HHSearch
--	Muscle
--	Kalign
+-	Muscle or Kalign
+
+Be advised
+Perl, BioPerl, Blastall, Muscle and Kalign can be installed with 'apt-get install' command
+HHsearch and Usearch need to be installed manually
 
 Perl modules
 Hieranoid uses Perl modules that are installed in the 'lib' sub-directory of the Hieranoid installation.
 Please add that directory to your PERL5LIB enviromental variable. In bash you do that the following way:
 	export PERL5LIB=$PERL5LIB:hieranoid_directory/lib
+	
+Be advised 
+For cluster users, several Perl modules need to be install manually, possibly including:
+Module::Implementation	Module::Runtime
+Class:Load	Class:MOP
+Sub::Exporter	Sub::Install	Sub::Name
+Try::Tiny
+Package::DeprecationManager	Package::Stash
+Moose
+Clone
+Data::OptList
+Params::Util
 
 Configuring Hieranoid
 Once you have downloaded Hieranoid, you have to tell Hieranoid where to find the required programs. 
