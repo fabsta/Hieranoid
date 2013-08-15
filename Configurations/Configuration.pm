@@ -21,12 +21,12 @@ $rootDirectory = Cwd::cwd;
 push(@INC,"$rootDirectory/lib");
 ## Check the following setting and make changes accordingly
 	# a directory with 'projectName' will be created in the current directory
-	$projectName = "project1";
+	$projectName = "67";
 	# Folder with proteome sequences
 	# Note that the file names have to match the species names in the tree
 	#$speciesFilesDirectory = "testdata/ensemblv60_12species/longestTranscript_smallSubset";
     #$speciesFilesDirectory = "testdata/inparanoid_data/refGenomes/";
-    $speciesFilesDirectory = "data/sequences";
+    $speciesFilesDirectory = "/scratch/enze/67/result";
     
     ## Choose sequence input format
 	# fasta : ".fa", 
@@ -35,7 +35,7 @@ push(@INC,"$rootDirectory/lib");
     
     ## Tree File
 	# Specify guide tree file
-    $treeFile = "data/tree/inparanoid10.tre";
+        $treeFile = "data/tree/66c.tre";
 	#$treeFile = "species/trees/inparanoid10RefGe.tre";
 	#$treeFile = "species/trees/ensembl60.tre";
     
@@ -47,13 +47,13 @@ push(@INC,"$rootDirectory/lib");
 
 ## HMMER BIN DIRECTORY
 	# ALIGNMENT PROGRAM
-	$muscle = "muscle";
-	$kalign = "kalign";
+	$muscle = "$rootDirectory/extern/muscle";
+	$kalign = "$rootDirectory/extern/kalign";
 	# SIMILARITY SEARCH
 	# Needs one of the following two programs: usearch or blast
 	# If using Usearch, you also need segmasker, as usearch does not perform sequence masking
 	# Binary of Usearch program http://www.drive5.com/usearch/
-	$usearch = "usearch";
+	$usearch = "$rootDirectory/extern/usearch5.1";
 	# SEQUENCE MASKING
 	$segmasker = "$rootDirectory/extern/segmasker";
 	# Binary of Blast program
@@ -64,11 +64,11 @@ push(@INC,"$rootDirectory/lib");
 	$perl = "perl";
 	
 	# PROFILE VS PROFILE COMPARISONS
-	$hhmake = "/Users/fs9/bin/source/hhsuite-2.0.0-macosx/bin/hhmake";
-	$hhblits = "/Users/fs9/bin/source/hhsuite-2.0.0-macosx/bin/hhblits";
-	$hhsearch = "/Users/fs9/bin/source/hhsuite-2.0.0-macosx/bin/hhsearch";
-	$hmmbuild = "/Users/fs9/bin/source/hmmer-3.0/src/hmmbuild";
-	$hmmscan = "/Users/fs9/bin/source/hmmer-3.0/src/hmmscan";
+	$hhmake = "/afs/pdc.kth.se/home/e/enze/Public/hhsuite-2.0.16/src/hhmake";
+	$hhblits = "/afs/pdc.kth.se/home/e/enze/Public/hhsuite-2.0.16/src/hhblits";
+	$hhsearch = "/afs/pdc.kth.se/home/e/enze/Public/hhsuite-2.0.16/src/hhsearch";
+	$hmmbuild = "/afs/pdc.kth.se/home/e/enze/Public/hhsuite-2.0.16/src/hmmbuild";
+	$hmmscan = "/afs/pdc.kth.se/home/e/enze/Public/hhsuite-2.0.16/src/hmmscan";
 # Parser
 	$blast2xml = "blast2xml.pl";
 	# Parses similarity search output in xml-format and combines HSP 

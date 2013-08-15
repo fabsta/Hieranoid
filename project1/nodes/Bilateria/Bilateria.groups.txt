@@ -1,2 +1,0 @@
-BilateriaBilateria1:CE00122,Tetrapoda1
-BilateriaBilateria2:CE00480,Coelomata1

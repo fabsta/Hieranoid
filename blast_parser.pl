@@ -3,9 +3,9 @@ use strict;
 use warnings; 
 
 # use lib 1 + 3 for cluster
-use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib64/perl5/site_perl/5.8.8/x86_64-linux-thread-multi';
-use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib64';
-use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib/site_perl/';
+#use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib64/perl5/site_perl/5.8.8/x86_64-linux-thread-multi';
+#use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib64';
+#use lib '/afs/pdc.kth.se/home/f/fabsta/Public/perlModules/clusterNode/lib/site_perl/';
 
 
 #use lib '/afs/pdc.kth.se/home/f/fabsta/perl-from-cpan/lib/perl/5.10.1';
